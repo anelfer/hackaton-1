@@ -1,0 +1,62 @@
+{
+  "language": [
+    "css",
+    "php",
+    "javascript",
+    "java",
+    "r",
+    "c++",
+    "c",
+    "c#",
+    "python",
+    "ruby",
+    "go",
+    "scala",
+    "swift",
+    "kotlin",
+    "typescript",
+    "objective-c",
+    "bash",
+    "sql",
+    "html",
+    "xml",
+    "json",
+    "yaml",
+    "mysql"
+  ],
+  "framework": [
+    "django",
+    "flask",
+    "spring",
+    "spring-boot",
+    "spring-mvc",
+    "spring-cloud",
+    "spring-data",
+    "spring-security",
+    "spring-integration",
+    "ajax",
+    "jquery",
+    "bootstrap",
+    "angular",
+    "angularjs",
+    "react",
+    "vue",
+    "node",
+    "express",
+    "pandas",
+    ".net",
+    "node.js"
+  ],
+  "other": [
+    "excel",
+    "arrays"
+  ],
+  "platform": [
+    "linux",
+    "windows",
+    "macos",
+    "android",
+    "ios",
+    "iphone"
+  ]
+}

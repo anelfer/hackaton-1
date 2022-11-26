@@ -5,6 +5,7 @@ import me.anelfer.centerkeys.db.model.HeadHunterEntity;
 import me.anelfer.centerkeys.db.model.StackoverflowEntity;
 import me.anelfer.centerkeys.db.model.TagEntity;
 import me.anelfer.centerkeys.service.MainService;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@CrossOrigin
 public class MainController {
 
     private final MainService service;
