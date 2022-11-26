@@ -53,6 +53,8 @@ public class HeadHunterParser implements Parser {
                     if (price.isEmpty()) continue;
                     int priceInt = Integer.parseInt(price.replaceAll(" ", ""));
                     String currency = splitPrice[splitPrice.length - 1];
+                    //mojno dobavit' vse chto nuzhn
+                    if (!currency.equals("руб.")) continue;
                     HeadHunterEntity headHunterEntity = new HeadHunterEntity(tag, name, priceInt, currency);
                     repository.save(headHunterEntity);
                 }
