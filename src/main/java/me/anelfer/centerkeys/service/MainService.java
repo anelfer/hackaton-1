@@ -15,6 +15,8 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -24,12 +26,16 @@ public class MainService {
     private final TagsRepository tagsRepository;
     private final HeadHunterRepository headHunterRepository;
 
-    public List<StackoverflowEntity> getEntities(String tag, LocalDateTime startTime, LocalDateTime endTime) {
-        return startTime == null ? repository.findAllByTag(tag) :
-                repository.findByTagAndTimestampBetween(
+    public Map<String, List<StackoverflowEntity>> getEntities(List<String> tag, LocalDateTime startTime, LocalDateTime endTime) {
+        return startTime == null ? repository.findAllByTagIn(tag)
+                .stream()
+                .collect(Collectors.groupingBy(StackoverflowEntity::getTag)) :
+                repository.findByTagInAndTimestampBetween(
                         tag,
                         Date.from(startTime.toInstant(ZoneOffset.UTC)),
-                        Date.from(endTime.toInstant(ZoneOffset.UTC)));
+                        Date.from(endTime.toInstant(ZoneOffset.UTC)))
+                        .stream()
+                        .collect(Collectors.groupingBy(StackoverflowEntity::getTag));
     }
 
     public List<TagEntity> getTags(int limit) {

@@ -3,7 +3,6 @@ package me.anelfer.centerkeys.component;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.anelfer.centerkeys.db.model.HeadHunterEntity;
-import me.anelfer.centerkeys.db.model.StackoverflowEntity;
 import me.anelfer.centerkeys.db.model.TagEntity;
 import me.anelfer.centerkeys.db.repository.HeadHunterRepository;
 import me.anelfer.centerkeys.db.repository.TagsRepository;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @AllArgsConstructor
@@ -22,8 +23,8 @@ public class MainController {
     private final MainService service;
 
     @GetMapping("/api/info")
-    public List<StackoverflowEntity> getInfo(
-            @RequestParam String tag,
+    public Map<String, List<StackoverflowEntity>> getInfo(
+            @RequestParam List<String> tag,
             @RequestParam(required = false) String date) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         return service.getEntities(tag,

@@ -13,7 +13,9 @@ public interface StackoverflowRepository extends JpaRepository<StackoverflowEnti
 
     List<StackoverflowEntity> findAllByTag(String tag);
 
-    List<StackoverflowEntity> findByTagAndTimestampBetween(String tag, Date timestamp, Date timestamp2);
+    List<StackoverflowEntity> findAllByTagIn(List<String> tag);
+
+    List<StackoverflowEntity> findByTagInAndTimestampBetween(List<String> tag, Date timestamp, Date timestamp2);
 
     @Query(value = "select tag, max(today) as today, max(id) as id, max(week) as week, max(total) as total, " +
             "max(timestamp) as timestamp " +
