@@ -1,4 +1,4 @@
-package me.anelfer.centerkeys.component;
+package me.anelfer.centerkeys.parser;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,16 +29,15 @@ public class StackOverflowParser implements Parser {
     @Scheduled(fixedRate = 5, timeUnit = TimeUnit.HOURS)
     @Override
     public void parse() {
+        log.info("Attempt to parse StackOverflow");
         try {
             Document doc = Jsoup.connect("https://stackoverflow.com/tags").get();
-            log.info(doc.title());
             Elements newsHeadlines = doc.select(".grid--item");
             for (Element headline : newsHeadlines) {
                 Optional<Element> tag = headline.getElementsByClass("post-tag").stream().findFirst();
                 if (tag.isEmpty()) continue;
                 Element tagElement = tag.get();
                 String tagText = tagElement.text();
-                System.out.println("tag = " + tagText);
 
                 Elements statsBlock = headline.getElementsByClass("fs-caption");
                 for (Element stats : statsBlock) {
@@ -52,19 +51,20 @@ public class StackOverflowParser implements Parser {
                     int today = Integer.parseInt(questionsToday.text().split(" ")[0]);
                     int week = Integer.parseInt(questionsWeek.text().split(" ")[0]);
 
-                    System.out.println("all questions = " + all);
-                    System.out.println("questions today = " + today);
-                    System.out.println("questionsWeek = " + week);
+//                    System.out.println("all questions = " + all);
+//                    System.out.println("questions today = " + today);
+//                    System.out.println("questionsWeek = " + week);
 
                     StackoverflowEntity entity = new StackoverflowEntity(tagText, all, week, today);
                     repository.save(entity);
                     boolean exists = tagsRepository.existsByTag(tagText);
                     if (!exists) tagsRepository.save(new TagEntity(tagText));
                 }
-                System.out.println("==========");
+//                System.out.println("==========");
             }
+            log.info("StackOverflow parsed successfully");
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error while parsing StackOverflow", e);
         }
     }
 

@@ -1,4 +1,4 @@
-package me.anelfer.centerkeys.component;
+package me.anelfer.centerkeys.parser;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,13 +28,13 @@ public class HeadHunterParser implements Parser {
     @Scheduled(fixedRate = 5, timeUnit = TimeUnit.HOURS)
     @Override
     public void parse() {
+        log.info("Attempt to parse HeadHunter");
         try {
             //very opasny moment)
             List<TagEntity> allTags = tagsRepository.findAll();
             for (TagEntity allTag : allTags) {
                 String tag = allTag.getTag();
                 Document doc = Jsoup.connect("https://hh.ru/search/vacancy?only_with_salary=true&text=" + tag).get();
-                log.info(doc.title());
                 Elements items = doc.getElementsByClass("serp-item");
                 for (Element item : items) {
                     Elements elementsByClass = item.getElementsByClass("serp-item__title");
@@ -56,11 +56,14 @@ public class HeadHunterParser implements Parser {
                     //mojno dobavit' vse chto nuzhn
                     if (!currency.equals("руб.")) continue;
                     HeadHunterEntity headHunterEntity = new HeadHunterEntity(tag, name, priceInt, currency);
+                    List<HeadHunterEntity> allByTagAndName = repository.findAllByTagAndName(tag, name);
+                    if (!allByTagAndName.isEmpty()) continue;
                     repository.save(headHunterEntity);
                 }
             }
+            log.info("HeadHunter parsed successfully");
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Error while parsing HeadHunter", e);
         }
     }
 

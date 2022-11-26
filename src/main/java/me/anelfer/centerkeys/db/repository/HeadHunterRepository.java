@@ -6,7 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public interface HeadHunterRepository extends CrudRepository<HeadHunterEntity, Long> {
@@ -17,7 +16,7 @@ public interface HeadHunterRepository extends CrudRepository<HeadHunterEntity, L
     @Query(value = "select max(price) from headhunter where tag=?", nativeQuery = true)
     int getMaxPriceByTag(String tag);
 
-    List<HeadHunterEntity> findAllByTag(String tag);
+    List<HeadHunterEntity> findAllByTagAndName(String tag, String name);
 
     List<HeadHunterEntity> findAllByTagIn(List<String> tag);
 

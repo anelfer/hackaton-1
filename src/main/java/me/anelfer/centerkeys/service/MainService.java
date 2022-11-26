@@ -1,9 +1,11 @@
 package me.anelfer.centerkeys.service;
 
 import lombok.AllArgsConstructor;
+import me.anelfer.centerkeys.db.model.HabrEntity;
 import me.anelfer.centerkeys.db.model.HeadHunterEntity;
 import me.anelfer.centerkeys.db.model.StackoverflowEntity;
 import me.anelfer.centerkeys.db.model.TagEntity;
+import me.anelfer.centerkeys.db.repository.HabrRepository;
 import me.anelfer.centerkeys.db.repository.HeadHunterRepository;
 import me.anelfer.centerkeys.db.repository.StackoverflowRepository;
 import me.anelfer.centerkeys.db.repository.TagsRepository;
@@ -12,7 +14,10 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,6 +27,7 @@ public class MainService {
     private final StackoverflowRepository repository;
     private final TagsRepository tagsRepository;
     private final HeadHunterRepository headHunterRepository;
+    private final HabrRepository habrRepository;
 
     public Map<String, List<StackoverflowEntity>> getEntities(List<String> tag, LocalDateTime startTime, LocalDateTime endTime) {
         return startTime == null ? repository.findAllByTagIn(tag)
@@ -61,6 +67,10 @@ public class MainService {
 
     public int getMaxPriceVacancy(String tag) {
         return headHunterRepository.getMaxPriceByTag(tag);
+    }
+
+    public Map<String, List<HabrEntity>> getNews(List<String> tag) {
+        return habrRepository.findAllByTagIn(tag).stream().collect(Collectors.groupingBy(HabrEntity::getTag));
     }
 
 }

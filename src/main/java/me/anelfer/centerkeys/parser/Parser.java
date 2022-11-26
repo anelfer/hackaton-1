@@ -1,4 +1,4 @@
-package me.anelfer.centerkeys.component;
+package me.anelfer.centerkeys.parser;
 
 public interface Parser {
 
