@@ -33,4 +33,9 @@ public class MainController {
         return service.getTags(limit == null ? 10 : limit);
     }
 
+    @GetMapping("/api/top")
+    public List<StackoverflowEntity> getTop(@RequestParam String by) {
+        return service.getTop(by);
+    }
+
 }
