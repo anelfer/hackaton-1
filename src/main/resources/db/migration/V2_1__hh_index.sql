@@ -1,0 +1,1 @@
+CREATE INDEX tag_ind_hh ON headhunter (tag);

@@ -1,0 +1,1 @@
+CREATE INDEX tag_ind ON stackoverflow (tag);

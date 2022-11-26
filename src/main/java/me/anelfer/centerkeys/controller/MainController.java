@@ -1,6 +1,7 @@
 package me.anelfer.centerkeys.controller;
 
 import lombok.AllArgsConstructor;
+import me.anelfer.centerkeys.db.model.HeadHunterEntity;
 import me.anelfer.centerkeys.db.model.StackoverflowEntity;
 import me.anelfer.centerkeys.db.model.TagEntity;
 import me.anelfer.centerkeys.service.MainService;
@@ -36,6 +37,16 @@ public class MainController {
     @GetMapping("/api/top")
     public List<StackoverflowEntity> getTop(@RequestParam String by) {
         return service.getTop(by);
+    }
+
+    @GetMapping("/api/vacancy")
+    public List<HeadHunterEntity> getVacancy(@RequestParam String tag) {
+        return service.getVacancies(tag);
+    }
+
+    @GetMapping("/api/vacancy/average")
+    public int getAvgPriceVacancy(@RequestParam String tag) {
+        return service.getAvgPriceVacancy(tag);
     }
 
 }

@@ -66,7 +66,6 @@ public class StackOverflowParser implements Parser  {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 }
