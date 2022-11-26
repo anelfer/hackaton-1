@@ -51,7 +51,7 @@ public class HeadHunterParser implements Parser {
                         price = splitPrice[0];
                     }
                     if (price.isEmpty()) continue;
-                    int priceInt = Integer.parseInt(price.replaceAll(" ",""));
+                    int priceInt = Integer.parseInt(price.replaceAll(" ", ""));
                     String currency = splitPrice[splitPrice.length - 1];
                     HeadHunterEntity headHunterEntity = new HeadHunterEntity(tag, name, priceInt, currency);
                     repository.save(headHunterEntity);

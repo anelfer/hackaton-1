@@ -24,9 +24,10 @@ public class StackoverflowEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
-    public StackoverflowEntity() {}
+    public StackoverflowEntity() {
+    }
 
-    public StackoverflowEntity(String tag, int total, int week,  int today) {
+    public StackoverflowEntity(String tag, int total, int week, int today) {
         this.tag = tag;
         this.total = total;
         this.week = week;

@@ -24,7 +24,8 @@ public class HeadHunterEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
-    public HeadHunterEntity() {}
+    public HeadHunterEntity() {
+    }
 
     public HeadHunterEntity(String tag, String name, int price, String currency) {
         this.tag = tag;

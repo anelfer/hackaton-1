@@ -43,13 +43,18 @@ public class MainController {
     }
 
     @GetMapping("/api/vacancy")
-    public List<HeadHunterEntity> getVacancy(@RequestParam String tag) {
+    public Map<String, List<HeadHunterEntity>> getVacancy(@RequestParam List<String> tag) {
         return service.getVacancies(tag);
     }
 
     @GetMapping("/api/vacancy/average")
     public int getAvgPriceVacancy(@RequestParam String tag) {
         return service.getAvgPriceVacancy(tag);
+    }
+
+    @GetMapping("/api/vacancy/max")
+    public int getMaxPriceVacancy(@RequestParam String tag) {
+        return service.getMaxPriceVacancy(tag);
     }
 
 }

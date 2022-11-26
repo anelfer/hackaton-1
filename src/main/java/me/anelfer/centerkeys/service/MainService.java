@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,9 +28,9 @@ public class MainService {
                 .stream()
                 .collect(Collectors.groupingBy(StackoverflowEntity::getTag)) :
                 repository.findByTagInAndTimestampBetween(
-                        tag,
-                        Date.from(startTime.toInstant(ZoneOffset.UTC)),
-                        Date.from(endTime.toInstant(ZoneOffset.UTC)))
+                                tag,
+                                Date.from(startTime.toInstant(ZoneOffset.UTC)),
+                                Date.from(endTime.toInstant(ZoneOffset.UTC)))
                         .stream()
                         .collect(Collectors.groupingBy(StackoverflowEntity::getTag));
     }
@@ -54,12 +51,16 @@ public class MainService {
         };
     }
 
-    public List<HeadHunterEntity> getVacancies(String tag) {
-        return headHunterRepository.findAllByTag(tag);
+    public Map<String, List<HeadHunterEntity>> getVacancies(List<String> tag) {
+        return headHunterRepository.findAllByTagIn(tag).stream().collect(Collectors.groupingBy(HeadHunterEntity::getTag));
     }
 
     public int getAvgPriceVacancy(String tag) {
         return headHunterRepository.getAveragePriceByTag(tag);
+    }
+
+    public int getMaxPriceVacancy(String tag) {
+        return headHunterRepository.getMaxPriceByTag(tag);
     }
 
 }

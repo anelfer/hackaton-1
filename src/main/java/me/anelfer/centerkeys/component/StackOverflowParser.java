@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 @Component
 @AllArgsConstructor
-public class StackOverflowParser implements Parser  {
+public class StackOverflowParser implements Parser {
 
     private final StackoverflowRepository repository;
     private final TagsRepository tagsRepository;

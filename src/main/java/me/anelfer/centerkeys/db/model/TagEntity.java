@@ -21,7 +21,8 @@ public class TagEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
 
-    public TagEntity() {}
+    public TagEntity() {
+    }
 
     public TagEntity(String tag) {
         this.tag = tag;
